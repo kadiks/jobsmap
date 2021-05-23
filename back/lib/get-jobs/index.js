@@ -10,7 +10,7 @@ const jobs = {
 module.exports = async function getJobs(token){
     const jobsAreFresh = (new Date() - jobs.lastSet) < 8.64e+7
     if(jobs.data && jobsAreFresh){
-        return jobs.counts
+        return Object.values(jobs.counts)
     }
     else{
         jobs.data = []
