@@ -50,6 +50,7 @@ export default function About() {
               src="/photo.jpg"
               width={100}
               height={100}
+              
               className={styles.image}
             /> */}
           </a>

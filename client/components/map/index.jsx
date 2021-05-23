@@ -32,9 +32,9 @@ function DisplayPosition({ map, center, prevCenter }) {
   }, [map]);
 
   useEffect(() => {
-    console.log("useEffect update Map (Display)");
-    console.log("useEffect update center", center);
-    console.log("useEffect update prevcenter", prevCenter);
+    // console.log("useEffect update Map (Display)");
+    // console.log("useEffect update center", center);
+    // console.log("useEffect update prevcenter", prevCenter);
 
     if (prevCenter) {
       setPosition({ lat: prevCenter[0], lng: prevCenter[1] });

@@ -9,6 +9,7 @@ const Cities = ({
     <ul
       className="text-white overflow-scroll"
       style={{
+        overflow: "scroll",
         height: "80vh",
       }}
     >

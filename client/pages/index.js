@@ -22,7 +22,7 @@ const Home = ({ places }) => {
   });
 
   const onClickCity = (coords) => {
-    console.log("coords", coords);
+    // console.log("coords", coords);
     setCenter(coords);
   };
 

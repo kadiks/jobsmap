@@ -13,9 +13,9 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 
 function SetViewOnClick({ animateRef }) {
-  console.log("#setViewOnClick");
+  // console.log("#setViewOnClick");
   const map = useMapEvent("click", (e) => {
-    console.log("locationfoundk!!!!", e.latlng);
+    // console.log("locationfoundk!!!!", e.latlng);
     map.panTo(e.latlng, map.getZoom(), {
       animate: animateRef.current || false,
     });
@@ -33,12 +33,12 @@ const Map = ({
   const animateRef = useRef(false);
 
   useEffect(() => {
-    console.log("useEffect #1");
+    // console.log("useEffect #1");
     if (!map) {
-      console.log("useEffect #2 out");
+      // console.log("useEffect #2 out");
       return;
     }
-    console.log("useEffect #3");
+    // console.log("useEffect #3");
 
     map.panTo(e.latlng, map.getZoom(), {
       animate: animateRef.current || false,
