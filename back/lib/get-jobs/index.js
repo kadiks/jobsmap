@@ -17,7 +17,7 @@ module.exports = async function getJobs(token){
         await requestJobs_(token)
         countJobs()
         cleanJobs()
-        return jobs.counts
+        return Object.values(jobs.counts)
     }
 }
 
@@ -39,7 +39,7 @@ function countJobs(){
         }else{
             jobs.counts[entry.lieuTravail.libelle] = {
                 id: entry.lieuTravail.codePostal,
-                name: entry.lieuTravail.libelle,
+                name: entry.lieuTravail.libelle.replace(/\d+\s-\s/giu, ''),
                 type: 'city',
                 total: 1,
                 coords: [entry.lieuTravail.latitude, entry.lieuTravail.longitude]
