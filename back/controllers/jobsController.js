@@ -1,7 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const getJobs = (req, res) => {
+const getJobsFromAPI = require('../lib/get-jobs')
+
+const getJobs = async (req, res) => {
+
+  const jabs = await getJobsFromAPI(req.accessToken)
+  res.json({
+    success: true,
+    data: jabs
+  });
+  /*
+  console.log(jabs)
   const jobs = [
     {
       "city": "Paris",
@@ -16,6 +26,7 @@ const getJobs = (req, res) => {
     success: true,
     data: jobs
   });
+  */
 }
 
 //router.route('/').get(getJobs);
