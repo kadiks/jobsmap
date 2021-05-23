@@ -9,7 +9,7 @@ app.use(express.json());
 
 // controllers
 const {
-  jobsController
+  jobsController,
 } = require('/controllers');
 
 // Routes

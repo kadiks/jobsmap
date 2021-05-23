@@ -6,7 +6,7 @@ const getJobs = (req, res) => {
     {
       "city": "Paris",
       "total": 1234
-    }
+    },
     {
       "city": "Marseille",
       "total": 800
