@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "/styles/About.module.css";
 
 export default function About() {
@@ -13,38 +12,46 @@ export default function About() {
 
       <main className={styles.main}>
         <div className={styles.mission}>
-        <h2 className={styles.title}>
-          Mission
-        </h2>
+          <h2 className={styles.title}>Mission</h2>
 
-        <p className={styles.description}>
-        Rechercher un métier dans la programmation lorsqu'on se reconverti professionnellement est souvent impressionant :
-        </p>
+          <p className={styles.description}>
+            Rechercher un métier dans la programmation lorsqu'on se reconverti
+            professionnellement est souvent impressionant :
+          </p>
 
-        <ul className={styles.description}>
+          <ul className={styles.description}>
+            <li>- on ne sait pas quelle branche du métier choisir</li>
             <li>
-            - on ne sait pas quelle branche du métier choisir
+              - on se demande si la branche choisie permet de trouver un boulot
+              dans sa région
             </li>
             <li>
-            - on se demande si la branche choisie permet de trouver un boulot dans sa région
+              - les formations nous persuadent que leur choix de technologies
+              (langages) est le meilleur, mais comment en être sûr·e ?
             </li>
-            <li>
-            - les formations nous persuadent que leur choix de technologies (langages) est le meilleur, mais comment en être sûr·e ?
-            </li>
-        </ul>
+          </ul>
         </div>
 
-        <h2 className={styles.title}>
-            Philosophie
-        </h2>
-        <p className={styles.description}>Nous voulions créer un projet à impact social et apprendre de nouvelles compétences en programmation par la même occasion.
-        Ce projet est open source et si vous voulez y contribuer, n'hésitez à contacter l'un de nous. 
+        <h2 className={styles.title}>Philosophie</h2>
+        <p className={styles.description}>
+          Nous voulions créer un projet à impact social et apprendre de
+          nouvelles compétences en programmation par la même occasion. Ce projet
+          est open source et si vous voulez y contribuer, n'hésitez à contacter
+          l'un de nous.
         </p>
 
         <div className={styles.grid}>
-          <a href="https://www.linkedin.com/in/yousra-h-919ba0198/" className={styles.card}>
+          <a
+            href="https://www.linkedin.com/in/yousra-h-919ba0198/"
+            className={styles.card}
+          >
             <h2>Yousra H (Développeuse Next.js / React) &rarr;</h2>
-            <Image src="/photo.jpg"  width={100} height={100} className={styles.image}/>
+            {/* <img
+              src="/photo.jpg"
+              width={100}
+              height={100}
+              className={styles.image}
+            /> */}
           </a>
 
           <a href="https://nextjs.org/learn" className={styles.card}>
@@ -67,9 +74,7 @@ export default function About() {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        
-      </footer>
+      <footer className={styles.footer}></footer>
     </div>
   );
 }

@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export",
+    "predeploy": "next build && next export && npm run move-build",
+    "move-build": "cp -R out/ ../back/public/"
   },
   "dependencies": {
     "@headlessui/react": "^1.2.0",
