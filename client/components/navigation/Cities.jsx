@@ -6,7 +6,12 @@ const Cities = ({
   onClick = () => {},
 }) => {
   return (
-    <ul className="text-white">
+    <ul
+      className="text-white overflow-scroll"
+      style={{
+        height: "80vh",
+      }}
+    >
       {cities.map((city, index) => {
         return <Item key={index} {...city} onClick={onClick} />;
       })}

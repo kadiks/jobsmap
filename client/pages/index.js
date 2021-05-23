@@ -26,6 +26,8 @@ const Home = ({ places }) => {
     setCenter(coords);
   };
 
+  // console.log("places", places);
+
   const markers = places.map((place) => {
     return {
       title: `${place.name}. Total : ${place.total}`,
