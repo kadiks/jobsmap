@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 
+require('dotenv').config()
+
+
 // app
 const app = express();
 app.use(cors());
@@ -18,10 +21,10 @@ const initial = () => {
 // controllers
 const {
   jobsController,
-} = require('/controllers');
+} = require('./controllers');
 
 // Routes
-app.use('./jobs', jobsController);
+app.use('/jobs', jobsController.getJobs);
 
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {

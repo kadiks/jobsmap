@@ -18,4 +18,6 @@ const getJobs = (req, res) => {
   });
 }
 
-router.route('/').get(getJobs);
+//router.route('/').get(getJobs);
+
+module.exports = { getJobs }

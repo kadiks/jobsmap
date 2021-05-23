@@ -1,7 +1,5 @@
 //@ts-check
 
-const thing = require('./test-vectors/jobs.json')
-
 function jobsPerPlace(results){
     const placeJobCounts = {}
     console.log(results.length)
@@ -16,4 +14,4 @@ function jobsPerPlace(results){
     return placeJobCounts
 }
 
-jobsPerPlace(thing["resultats"])
+module.exports = jobsPerPlace
