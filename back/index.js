@@ -1,11 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 
-//app
+// app
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// function to set a new token
+const initial = () => {
+  const accessToken = "";
+  setInterval(function () {
+    accesToken = "";
+  }, 1000);
+}
 
 // controllers
 const {
