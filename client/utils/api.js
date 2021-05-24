@@ -6,7 +6,7 @@ const getPlaces = async () => {
   const res = await fetch(`${server}/jobs/places`);
   const data = await res.json();
 
-  console.log("data", data.data);
+  //   console.log("data", data.data);
   return data?.data || [];
 };
 

@@ -7,9 +7,10 @@ import { Sidebar } from "../components/navigation";
 import { getPlaces } from "../utils/api";
 
 const Home = ({ places }) => {
-  const [center, setCenter] = useState(
-    places[0]?.coords || [45.78365, 3.10013]
-  );
+  const defaultCenter = places[0]?.coords || [45.78365, 3.10013];
+  const [center, setCenter] = useState(defaultCenter);
+
+  let mapComp;
   const prevCenterRef = useRef();
   const prevCenter = prevCenterRef.current;
 
@@ -21,9 +22,21 @@ const Home = ({ places }) => {
     ssr: false,
   });
 
+  const getMap = ({ map }) => {
+    console.log("pages/index getMap", map);
+    console.log("pages/index getMap map.getCenter", map.getCenter());
+    mapComp = map;
+  };
+
   const onClickCity = (coords) => {
     // console.log("coords", coords);
-    setCenter(coords);
+    console.log("mapComp.getCenter()", mapComp.getCenter());
+    mapComp.flyTo(coords);
+    // setCenter(coords);
+    setTimeout(() => {
+      // setCenter(coords);
+      console.log("mapComp.getCenter()", mapComp.getCenter());
+    }, 2000);
   };
 
   // console.log("places", places);
@@ -56,7 +69,11 @@ const Home = ({ places }) => {
           <Sidebar cities={cities} onClick={onClickCity} />
         </div>
         <div className="flex-grow h-screen">
-          <Map center={center} prevCenter={prevCenter} markers={markers} />
+          <Map
+            defaultCenter={defaultCenter}
+            markers={markers}
+            getMap={getMap}
+          />
         </div>
       </div>
     </>
