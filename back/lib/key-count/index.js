@@ -2,7 +2,6 @@
 
 function jobsPerPlace(results){
     const placeJobCounts = {}
-    console.log(results.length)
     results.forEach( datum => {
         const place = datum["lieuTravail"]["libelle"]
         if(!placeJobCounts[place]){

@@ -26,7 +26,7 @@ async function requestJobs_(token, index=0){
     const res = await fetch(url, { method: 'GET', headers: {Authorization: `Bearer ${token}`} })
     const json = await res.json()
     jobs.data = jobs.data.concat(json.resultats)
-    if(res.status === 206 && index +150 < 1000){
+    if(res.status === 206 && index + 150 < 1000){
         await setTimeout(() => {}, 10000)
         return requestJobs_(token, index + 150)
     }

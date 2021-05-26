@@ -1,47 +1,54 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const getToken = require("./lib/get-token");
-const PORT = process.env.PORT || 3002;
+//@ts-check
+
+require("dotenv").config()
+const express = require("express")
+const cors = require("cors")
+const getToken = require("./lib/get-token")
+const getMongoClient = require("./lib/get-mongo-client")
+const PORT = process.env.PORT || 3002
 
 // app
-const app = express();
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const app = express()
+app.use(cors())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 // Serve static
-app.use(express.static("public"));
+app.use(express.static("public"))
 
 // controllers
-const { jobsController } = require("./controllers");
+const { jobsController } = require("./controllers")
 
-let accessToken = null;
-
-app.all("*", function (req, res, next) {
-  if (!accessToken) {
-    res.json({
-      success: false,
-      data: "server error: no b2b token",
-    });
-    return;
-  } else {
-    req.accessToken = accessToken;
-    next();
-  }
-});
-
-async function init() {
-  accessToken = await getToken();
-  // Routes
-  app.use("/jobs/places", jobsController.getJobs);
-  // set a new token
-  setInterval(async function () {
-    accesToken = await getToken();
-  }, 1499000);
+async function mongoRequest() {
+  const db = await getMongoClient();
+  const jobs = db.collection('jobs')
+  const aggOpt = [
+    {
+      $group:
+      {
+        _id: '$lieuTravail.codePostal',
+        name: { $first: '$lieuTravail.libelle' },
+        total: { $sum: '$nombrePostes' },
+        latitude: { $first: '$lieuTravail.latitude' },
+        longitude: { $first: '$lieuTravail.longitude' }
+      }
+    },
+    {
+      $project: {
+        'name': '$name',
+        'type': 'city',
+        'total': '$total',
+        'coord': ['$latitude', '$longitude']
+      }
+    }
+  ]
+  const jobsPerCommunes = await jobs.aggregate(aggOpt).toArray()
 }
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-  init();
+
+app.listen(PORT, async () => {
+  await mongoRequest()
+  return
+  //console.log(`Server is running on port ${PORT}.`);
+  //init();
 });
