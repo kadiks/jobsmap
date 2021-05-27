@@ -18,6 +18,7 @@ app.use(express.static("public"))
 const { jobsController } = require("./controllers")
 
 app.get('/jobs/places', jobsController.getJobs)
+app.get('/jobs/places/:placeId', jobsController.getJobsWithPlaceId)
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}.`);
