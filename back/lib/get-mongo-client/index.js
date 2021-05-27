@@ -5,5 +5,5 @@ module.exports = async function getMongoClient() {
   const url = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/?retryWrites=true&w=majority`;
   const client = new MongoClient(url, { useUnifiedTopology: true });
   await client.connect();
-  return client.db("mapojob");
+  return client.db(process.env.MONGO_DB_NAME);
 };

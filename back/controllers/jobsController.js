@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const getJobsFromAPI = require('../lib/get-jobs')
+const getJobsFromDB = require('../lib/db/job-places')
 
 const getJobs = async (req, res) => {
-  const jobs = await getJobsFromAPI(req.accessToken)
+  const jobs = await getJobsFromDB()
   res.json({
     success: true,
     data: jobs
