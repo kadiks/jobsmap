@@ -25,4 +25,7 @@ const getJobsWithPlaceId = async (req, res) => {
   })
 }
 
-module.exports = { getJobs, getJobsWithPlaceId }
+router.get('/places', getJobsFromDB)
+router.get('/places/:placeId', getJobsWithPlaceId)
+
+module.exports = router
