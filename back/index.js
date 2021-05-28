@@ -5,7 +5,7 @@ const express = require("express")
 const cors = require("cors")
 const PORT = process.env.PORT || 3002
 
-const { initMongoClient, db } = require('./lib/get-mongo-client')
+const { initMongoClient } = require('./lib/get-mongo-client')
 
 // app
 const app = express()
@@ -23,12 +23,20 @@ async function init(){
   try{
     await initMongoClient()
     app.use('/jobs', jobsController)
-    app.listen(PORT, async () => {
-      console.log(`Server is running on port ${PORT}.`);
-    });
   }
   catch(error){
     console.error(error.message)
+    app.use('*', (req, res) => {
+      res.json({
+        success: false,
+        data: `DB ERROR: ${error.message}`
+      })
+    })
+  }
+  finally{
+    app.listen(PORT, async () => {
+      console.log(`Server is running on port ${PORT}.`);
+    });
   }
 }
 
