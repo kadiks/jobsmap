@@ -5,7 +5,8 @@ const getJobsFromDB = require('../lib/db/job-places')
 const getJobsWithIdFromDb = require('../lib/db/job-places-id')
 
 const getJobs = async (req, res) => {
-  const jobs = await getJobsFromDB()
+  const {dbClient} = req
+  const jobs = await getJobsFromDB(dbClient)
   res.json({
     success: true,
     data: jobs
@@ -13,6 +14,7 @@ const getJobs = async (req, res) => {
 }
 
 const getJobsWithPlaceId = async (req, res) => {
+  const {dbClient} = req
   let jobs = await getJobsWithIdFromDb(req.params.placeId)
   if(jobs.length === 1){
     jobs = jobs[0]
@@ -25,7 +27,7 @@ const getJobsWithPlaceId = async (req, res) => {
   })
 }
 
-router.get('/places', getJobsFromDB)
+router.get('/places', getJobs)
 router.get('/places/:placeId', getJobsWithPlaceId)
 
 module.exports = router

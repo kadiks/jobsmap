@@ -1,10 +1,9 @@
 //@ts-check
 
-const getMongoClient = require("../../../lib/get-mongo-client")
+const {db} = require("../../../lib/get-mongo-client")
 
 async function jobsPlaces() {
-    const db = await getMongoClient();
-    const jobs = db.collection('jobs')
+    const jobs = db().collection('jobs')
     const aggOpt = [
         {
             $group: {
