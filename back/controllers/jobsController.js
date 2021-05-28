@@ -5,8 +5,8 @@ const getJobsFromDB = require('../lib/db/job-places')
 const getJobsWithIdFromDb = require('../lib/db/job-places-id')
 
 const getJobs = async (req, res) => {
-  const {dbClient} = req
-  const jobs = await getJobsFromDB(dbClient)
+  const {db} = req.app.locals
+  const jobs = await getJobsFromDB(db)
   res.json({
     success: true,
     data: jobs
@@ -14,8 +14,8 @@ const getJobs = async (req, res) => {
 }
 
 const getJobsWithPlaceId = async (req, res) => {
-  const {dbClient} = req
-  let jobs = await getJobsWithIdFromDb(req.params.placeId)
+  const {db} = req.app.locals
+  let jobs = await getJobsWithIdFromDb(db, req.params.placeId)
   if(jobs.length === 1){
     jobs = jobs[0]
   }else{

@@ -1,39 +1,14 @@
 //@ts-check
+const commonAggregateOptions = require('../common-aggregate-options')
 
-const {db} = require("../../../lib/get-mongo-client")
-
-async function jobsPlaces() {
-    const jobs = db().collection('jobs')
+async function jobsPlaces(db) {
+    const jobs = db.collection('jobs')
     const aggOpt = [
-        {
-            $group: {
-                _id: '$lieuTravail.codePostal',
-                total: { $sum: '$nombrePostes' },
-                _place: {'$first':'$$ROOT'}
-            }
-        },
-        {
-            $replaceRoot: {
-                newRoot: { $mergeObjects: [{total: '$total'}, '$_place'] }
-            }
-        },
-        {
-            $project: {
-                'id': '$_id',
-                'name': '$lieuTravail.libelle',
-                'type': 'city',
-                'total': '$total',
-                'coord': ['$lieuTravail.latitude', '$lieuTravail.longitude']
-            }
-        },
-        {
-            $unset: '_id'
-        },
-        {
-            $sort: {
-                name: 1
-            }
-        }
+        commonAggregateOptions.groupPerPostalCode,
+        commonAggregateOptions.restoreRoot,
+        commonAggregateOptions.PorjectToApiFormat,
+        commonAggregateOptions.remove_id,
+        commonAggregateOptions.sortByPlaceName
     ]
     const jobsPerCommunes = await jobs.aggregate(aggOpt).toArray()
     return jobsPerCommunes

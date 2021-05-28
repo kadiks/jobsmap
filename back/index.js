@@ -5,7 +5,7 @@ const express = require("express")
 const cors = require("cors")
 const PORT = process.env.PORT || 3002
 
-const { initMongoClient } = require('./lib/get-mongo-client')
+const { initMongoClient, db } = require('./lib/get-mongo-client')
 
 // app
 const app = express()
@@ -22,6 +22,7 @@ const { jobsController } = require("./controllers")
 async function init(){
   try{
     await initMongoClient()
+    app.locals.db = db()
     app.use('/jobs', jobsController)
   }
   catch(error){

@@ -5,7 +5,7 @@ const { MongoClient, Db } = require("mongodb");
 let dbInstance
 
 /**
- * 
+ * Checks if `dbName` is the name of an existing database
  * @param {Db} dbInstance 
  * @param {string} dbName 
  * @returns {Promise<boolean>}
@@ -35,7 +35,7 @@ async function initMongoClient(){
 }
 
 /**
- * Return the module level db instance
+ * Return the `get-mongo-client` module level db instance
  * @returns {Db}
  */
 function db(){ return dbInstance }

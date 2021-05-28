@@ -1,5 +1,11 @@
 # Mapojob backend
 
+## TODOS
+
+- write some tests (not entirely obvious where...)
+- review `common-aggregate-options`. As is, the options
+  aren't all independent, which is bad. Alternatives?
+
 ## Init
 
 Create a `.env` file with the following field and
@@ -49,7 +55,7 @@ GET
 }
 ```
 
-### `/job/places/;placeId`
+### `/job/places/:placeId`
 
 GET
 
@@ -65,14 +71,14 @@ Remarks:
 1. A MongoDB _id is **not** guaranteed to be unique _across_
    collections, making it unsusable as placeId across place
    types.
-2. Communes codes (INSEE and postal) are unique to this
-   collection, codes for regions and departements overlap.
+2. Communes codes (INSEE and postal) are unique across
+   collections, codes for regions and departements overlap.
 3. If we keep one of Region | Departement, the other becomes
    inaccessible. In the spirit of keeping things simple
    code-wise, the endpoint presented in this version only
    works with postal codes.
 4. what do we return on an postal code with no associated
-   job offers? As of now we return false. Of note:
-   we cannot, we the db as is, return a `JobPerPlace`
-   instance, as it have coords which are only available in a
-   job offer, not in the communes referenciel.
+   job offers? As of now we return false. Of note: we
+   cannot, we the db as is, return a `JobPerPlace` member,
+   as the `coords` are only available in a job offer, not in
+   the communes referenciel.
