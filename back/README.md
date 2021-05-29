@@ -2,9 +2,17 @@
 
 ## TODOS
 
-- write some tests (not entirely obvious where...)
-- review `common-aggregate-options`. As is, the options
+- ☐ write some tests (not entirely obvious where...)
+- ☐ review `common-aggregate-options`. As is, the options
   aren't all independent, which is bad. Alternatives?
+- ☑ restructure `get-mongo-client`. We no longer need
+  separate connection and db instance getter.
+- ☑ document/type `job-places` and `job-places-id` modules.
+- ☐ it seems `@ts-check` allows `@typedef`s from other
+  files. Could we have a single file with only `@typedef`s?
+  As of now, we have two copies of `JobsPerPlace` and it is
+  likely that our routes and requests will have closely
+  related types.
 
 ## Init
 
@@ -34,11 +42,11 @@ folder of the `jobsmap-db-tooling` project:
 
 ```
 JobsPerPlace {
-    id: string,
-    name: string,
-    type: 'city',
-    total: number,
-    coords: [ number, number ]
+   id: string
+   name: string
+   type: string
+   number: total
+   coords: [number, number]
 }
 ```
 

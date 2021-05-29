@@ -7,7 +7,9 @@ const PORT = process.env.PORT || 3002
 
 const { initMongoClient, db } = require('./lib/get-mongo-client')
 
-// app
+/**
+ * @type {express.application} - app
+ */
 const app = express()
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
@@ -34,6 +36,8 @@ async function init(){
       })
     })
   }
+  // serve despite no db connection, the front will also see
+  // the error in API call response body.
   finally{
     app.listen(PORT, async () => {
       console.log(`Server is running on port ${PORT}.`);

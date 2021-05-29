@@ -22,6 +22,9 @@ async function dbExists(dbInstance, dbName){
  * Based on env, connects to a mongo instance, selects a db
  * instance and sets it to a module local variable to be
  * obtained via the `db` function
+ * @returns {Promise<void>}
+ * @throws if db name does not refer to
+ * existing database
  */
 async function initMongoClient(){
   const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, MONGO_PORT, MONGO_DB_NAME } = process.env;
