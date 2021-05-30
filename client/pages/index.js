@@ -93,21 +93,6 @@ const Home = (props) => {
     setCenter(filteredPlaces[0].coords);
   };
 
-  /**
-   * places [{
-   *    keywords: [{
-   *       keyword: "php",
-   *       count: 11
-   *    }, {
-   *      ...
-   *    }]
-   * }, {
-   * ...
-   * }]
-   */
-
-  // console.log("places", places);
-
   const markers = [];
   const cities = [];
   const keywords = [];
@@ -168,7 +153,7 @@ const Home = (props) => {
             onClickKeyword={onClickKeyword} />
         </div>
         <div className="flex flex-col flex-grow h-screen">
-          <Searchbar />
+          {/* <Searchbar /> */}
           <div className="flex-1">
             <Map
               defaultCenter={defaultCenter}
