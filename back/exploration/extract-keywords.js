@@ -40,6 +40,11 @@ const extractKeywords = (str) => {
   return extractedKeywords;
 }
 
-const string = "Stack technique - Langage : Vue.js, le back-end est en Python, Rust et C++ - Autres : Vue.js 2/3, Tailwind CSS - Données : Sur AWS, Aurora et Redshift - Cache : Redis - Environnement : Visual Studio code, sur l’OS que vous voulez !"
-
-console.log(extractKeywords(string));
+if(require.main === module){
+  // le module a été appelé directement (via `node
+  // extract-keywords.js`)
+  const testVector = "Stack technique - Langage : Vue.js, le back-end est en Python, Rust et C++ - Autres : Vue.js 2/3, Tailwind CSS - Données : Sur AWS, Aurora et Redshift - Cache : Redis - Environnement : Visual Studio code, sur l’OS que vous voulez !"
+  console.log(extractKeywords(string));
+}else{
+  module.exports = extractKeywords
+}

@@ -3,6 +3,8 @@ const router = express.Router();
 
 const getJobsFromAPI = require("../lib/get-jobs");
 
+const extractKeywords = require("../exploration/extract-keywords")
+
 const getJobs = async (req, res) => {
 	let jobs = await getJobsFromAPI(req.accessToken);
 	const { order } = req.query;
