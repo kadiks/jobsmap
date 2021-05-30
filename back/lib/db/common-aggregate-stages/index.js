@@ -1,4 +1,9 @@
 module.exports = {
+    matchCommuneType: {
+        $match: {
+            'lieuTravail.commune': { $exists: true }
+        }
+    },
     groupPerPostalCode: {
         $group: {
             _id: '$lieuTravail.codePostal',

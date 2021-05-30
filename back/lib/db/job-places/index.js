@@ -29,6 +29,7 @@ async function jobsPlaces(db, order) {
     }  
     const jobs = db.collection('jobs')
     const aggOpt = [
+        commonAggregateOptions.matchCommuneType,
         commonAggregateOptions.groupPerPostalCode,
         commonAggregateOptions.restoreRoot,
         commonAggregateOptions.PorjectToApiFormat,
