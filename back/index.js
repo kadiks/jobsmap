@@ -34,7 +34,7 @@ app.all("*", function (req, res, next) {
 async function init() {
 	accessToken = await getToken();
 	// Routes
-	app.use("/jobs/places", jobsController.getJobs);
+	app.use("/api/jobs/places", jobsController.getJobs);
 	// set a new token
 	setInterval(async function () {
 		accesToken = await getToken();
