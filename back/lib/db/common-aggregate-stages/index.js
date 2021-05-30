@@ -27,5 +27,10 @@ module.exports = {
         $sort: {
             name: 1
         }
+    },
+    sortByJobCount: {
+        $sort: {
+            total: -1
+        }
     }
 }

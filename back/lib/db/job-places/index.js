@@ -19,15 +19,22 @@ const commonAggregateOptions = require('../common-aggregate-stages')
  * query
  * @returns {Promise<Array<JobsPerPlace>>}
  */
-async function jobsPlaces(db) {
+async function jobsPlaces(db, order) {
+    let sorter = null
+    if(order === 'alpha'){
+      sorter = commonAggregateOptions.sortByPlaceName
+    }
+    if(order === 'offers'){
+      sorter = commonAggregateOptions.sortByJobCount
+    }  
     const jobs = db.collection('jobs')
     const aggOpt = [
         commonAggregateOptions.groupPerPostalCode,
         commonAggregateOptions.restoreRoot,
         commonAggregateOptions.PorjectToApiFormat,
-        commonAggregateOptions.remove_id,
-        commonAggregateOptions.sortByPlaceName
+        commonAggregateOptions.remove_id
     ]
+    if(sorter){ aggOpt.push(sorter) }
     const jobsPerCommunes = await jobs.aggregate(aggOpt).toArray()
     return jobsPerCommunes
 }

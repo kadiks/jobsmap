@@ -14,7 +14,8 @@ const getJobsWithIdFromDb = require('../lib/db/job-places-id')
  */
 const getJobs = async (req, res) => {
   const {db} = req.app.locals
-  const jobs = await getJobsFromDB(db)
+  const {order} = req.query
+  const jobs = await getJobsFromDB(db, order)
   res.json({
     success: true,
     data: jobs
