@@ -4,6 +4,16 @@ const { Db } = require('mongodb')
 const commonAggregateOptions = require('../common-aggregate-stages')
 
 /**
+ * @typedef {Object} AggOpt
+ * @property {Object} $match
+ * @property {Object} $group
+ * @property {Object} $replaceRoot
+ * @property {Object} $project
+ * @property {Object} $unset
+ * @property {Object} $sort
+ */
+
+/**
  * @typedef {Object} JobsPerPlace
  * @property {string} id
  * @property {string} name
@@ -28,6 +38,9 @@ async function jobsPlaces(db, order) {
       sorter = commonAggregateOptions.sortByJobCount
     }  
     const jobs = db.collection('jobs')
+    /**
+     * @type any
+     */
     const aggOpt = [
         commonAggregateOptions.matchCommuneType,
         commonAggregateOptions.groupPerPostalCode,
