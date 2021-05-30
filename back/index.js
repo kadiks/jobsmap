@@ -19,29 +19,29 @@ const { jobsController } = require("./controllers");
 let accessToken = null;
 
 app.all("*", function (req, res, next) {
-  if (!accessToken) {
-    res.json({
-      success: false,
-      data: "server error: no b2b token",
-    });
-    return;
-  } else {
-    req.accessToken = accessToken;
-    next();
-  }
+	if (!accessToken) {
+		res.json({
+			success: false,
+			data: "server error: no b2b token",
+		});
+		return;
+	} else {
+		req.accessToken = accessToken;
+		next();
+	}
 });
 
 async function init() {
-  accessToken = await getToken();
-  // Routes
-  app.use("/jobs/places", jobsController.getJobs);
-  // set a new token
-  setInterval(async function () {
-    accesToken = await getToken();
-  }, 1499000);
+	accessToken = await getToken();
+	// Routes
+	app.use("/api/jobs/places", jobsController.getJobs);
+	// set a new token
+	setInterval(async function () {
+		accesToken = await getToken();
+	}, 1499000);
 }
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-  init();
+	console.log(`Server is running on port ${PORT}.`);
+	init();
 });
