@@ -10,7 +10,7 @@ const Cities = ({
       className="text-white overflow-scroll"
       style={{
         overflow: "scroll",
-        height: "80vh",
+        height: "70vh",
       }}
     >
       {cities.map((city, index) => {

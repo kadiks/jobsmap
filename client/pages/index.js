@@ -10,12 +10,16 @@ const Home = (props) => {
   const defaultCenter = props.places[0]?.coords || [45.78365, 3.10013];
   const [center, setCenter] = useState(defaultCenter);
   const [places, setPlaces] = useState(props.places);
-  const [selectedKeywords, setSelectedKeywords] = useState(['javascript', 'php']);
-  const [filterType, setFilterType] = useState('cities');
+  const [selectedKeywords, setSelectedKeywords] = useState([]);
+  const [filterType, setFilterType] = useState('technologies');
 
   let mapComp;
   const prevCenterRef = useRef();
   const prevCenter = prevCenterRef.current;
+
+  useEffect(() => {
+    filterByKeyword();  
+  }, []);
 
   useEffect(() => {
     prevCenterRef.current = center;
@@ -49,17 +53,44 @@ const Home = (props) => {
   const onClickKeyword = (keyword) => {
     console.log('pages/index #onClickkeyword keyword', keyword);
 
-    const filteredPlaces = props.places.filter((place) => place.keywords.find(k => k.keyword === keyword));
+    filterByKeyword(keyword);
+  };
 
-    setPlaces(filteredPlaces);
-    const keywordIndex = selectedKeywords.indexOf(keyword);
-    if (keywordIndex >= 0) {
-      const newKeywords = [...selectedKeywords];
-      newKeywords.splice(keywordIndex, 1);
-      setSelectedKeywords(newKeywords);
-    } else {
-      setSelectedKeywords([...selectedKeywords, keyword]);
+  const filterByKeyword = (keyword = null) => {
+    const newKeywords = [...selectedKeywords];
+    
+    if (keyword !== null) {
+      const keywordIndex = selectedKeywords.indexOf(keyword);
+      if (keywordIndex >= 0) {
+        newKeywords.splice(keywordIndex, 1);
+      } else {
+        newKeywords.push(keyword);
+      }
     }
+
+    let filteredPlaces = props.places;
+
+
+    console.log("newKeywords", newKeywords);
+    
+
+    if (newKeywords.length > 0) {
+      for (const curKeyword of newKeywords) {
+        filteredPlaces = filteredPlaces.filter((place) => {
+          return place.keywords.find(k => k.keyword === curKeyword);
+        });
+        console.log("curKeyword", curKeyword);
+        console.log("filteredPlaces", filteredPlaces.length);
+      }
+    }
+    
+
+    console.log("filteredPlaces", filteredPlaces.length);
+    
+    setPlaces(filteredPlaces);
+    setSelectedKeywords(newKeywords);
+    setFilterType('cities');
+    setCenter(filteredPlaces[0].coords);
   };
 
   /**
@@ -115,7 +146,6 @@ const Home = (props) => {
         });
       }
     }
-    
   }
 
   return (
@@ -133,6 +163,7 @@ const Home = (props) => {
             onChangeFilterType={onChangeFilterType}
             cities={cities}
             keywords={uniqKeywordsObj}
+            selectedKeywords={selectedKeywords}
             onClickCity={onClickCity}
             onClickKeyword={onClickKeyword} />
         </div>
@@ -141,6 +172,7 @@ const Home = (props) => {
           <div className="flex-1">
             <Map
               defaultCenter={defaultCenter}
+              center={center}
               markers={markers}
               getMap={getMap}
             />

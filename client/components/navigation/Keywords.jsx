@@ -3,6 +3,7 @@ const Keywords = ({
       { name: "PHP", value: "php" },
       { name: "C#", value: "c#" },
     ],
+    selectedKeywords,
     onClick = () => {},
   }) => {
     return (
@@ -13,14 +14,14 @@ const Keywords = ({
           height: "80vh",
         }}
       >
-        {keywords.map((city, index) => {
-          return <Item key={index} {...city} onClick={onClick} />;
+        {keywords.map((keyword, index) => {
+          return <Item key={index} {...keyword} selectedKeywords={selectedKeywords} onClick={onClick} />;
         })}
       </ul>
     );
   };
   
-  const Item = ({ name, value, onClick }) => {
+  const Item = ({ name, value, selectedKeywords, onClick }) => {
     return (
       <li
         className="flex p-1 border-b border-indigo-500 cursor-pointer hover:bg-indigo-500 hover:text-indigo-800"
@@ -30,6 +31,7 @@ const Keywords = ({
         <input
             type="checkbox"
             onChange={() => onClick(value)}
+            checked={selectedKeywords.includes(value)}
             className="form-tick appearance-none h-6 w-6 border border-gray-300 rounded-md checked:border-transparent focus:outline-none checked:bg-yellow-400 checked:border-transparent" />
       </li>
     );
