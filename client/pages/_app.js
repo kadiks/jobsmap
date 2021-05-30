@@ -1,5 +1,7 @@
 import "tailwindcss/tailwind.css";
 import "leaflet/dist/leaflet.css";
+import "../styles/globals.css";
+
 // import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 // import "leaflet-defaulticon-compatibility";
 

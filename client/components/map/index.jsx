@@ -21,7 +21,7 @@ function Map({ markers, defaultCenter, center, zoom = 8, getMap }) {
       {markers.map(({ title, coords }, index) => {
         return (
           <Marker key={index} position={coords}>
-            {title && <Popup>{title}</Popup>}
+            {title && <Popup className="font-sans" ><p dangerouslySetInnerHTML={{__html: title }} /></Popup>}
           </Marker>
         );
       })}
