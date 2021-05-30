@@ -1,6 +1,8 @@
 const { isNull } = require("lodash");
 const fetch = require("node-fetch");
 
+const extractKeywords = require("../../exploration/extract-keywords")
+
 const jobs = {
 	lastSet: new Date(),
 	data: null,
@@ -16,7 +18,9 @@ module.exports = async function getJobs(token) {
 		await requestJobs_(token);
 		countJobs();
 		cleanJobs();
-		return Object.values(jobs.counts);
+		const jobsArray = Object.values(jobs.counts)
+		jobsArray.forEach(job => job.keywords = pseudoSetToKw(job.keywords))
+		return jobsArray;
 	}
 };
 
@@ -33,10 +37,33 @@ async function requestJobs_(token, index = 0) {
 	}
 }
 
+function kwToPseudoSet(kw){
+	const entries = kw.map(Object.entries)
+	const cleanedEntries = entries.map( x => [ x[0][1], x[1][1] ])
+	return Object.fromEntries(cleanedEntries)
+}
+
+function pseudoSetToKw(pseudoSet){
+	return Object
+	.entries(pseudoSet)
+	.map( o => [['keyword', o[0]], ['count', o[1]]] ).map(Object.fromEntries)
+}
+
+function mergeKwSet(oldKw, newKw){
+	for(const keyword in newKw){
+		if(oldKw[keyword]){
+			oldKw[keyword]++
+		}else{
+			oldKw[keyword] = 1
+		}
+	}
+}
+
 function countJobs() {
 	for (const entry of jobs.data) {
 		if (jobs.counts[entry.lieuTravail.libelle]) {
 			jobs.counts[entry.lieuTravail.libelle].total++;
+			mergeKwSet(jobs.counts[entry.lieuTravail.libelle].keywords, kwToPseudoSet(extractKeywords(entry.description)))
 		} else {
 			jobs.counts[entry.lieuTravail.libelle] = {
 				id: entry.lieuTravail.codePostal,
@@ -44,6 +71,7 @@ function countJobs() {
 				type: "city",
 				total: 1,
 				coords: [entry.lieuTravail.latitude, entry.lieuTravail.longitude],
+				keywords: kwToPseudoSet(extractKeywords(entry.description))
 			};
 		}
 	}

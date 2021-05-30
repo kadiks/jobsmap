@@ -13,11 +13,11 @@ const extractKeywords = (str) => {
     keyword: kw,
     count: 0,
   }));
-  console.log(keywordObjects);
+  //console.log(keywordObjects);
 
   const strToLowerCase = str.toLowerCase();
   const strSplitted = strToLowerCase.split(new RegExp('[-/., ]', 'g'));
-  console.log("strPlitted", strSplitted);
+  //console.log("strPlitted", strSplitted);
 
   strSplitted.map((word) => {
     if (keywords.includes(word)) {
@@ -44,7 +44,7 @@ if(require.main === module){
   // le module a été appelé directement (via `node
   // extract-keywords.js`)
   const testVector = "Stack technique - Langage : Vue.js, le back-end est en Python, Rust et C++ - Autres : Vue.js 2/3, Tailwind CSS - Données : Sur AWS, Aurora et Redshift - Cache : Redis - Environnement : Visual Studio code, sur l’OS que vous voulez !"
-  console.log(extractKeywords(string));
+  console.log(extractKeywords(testVector));
 }else{
   module.exports = extractKeywords
 }
