@@ -26,8 +26,8 @@ const Item = ({ name, value, coords, onClick }) => {
       onClick={() => onClick(coords)}
       className="flex p-1 border-b border-indigo-500 cursor-pointer hover:bg-indigo-500 hover:text-indigo-800"
     >
-      <span className="flex-grow">{name}</span>
-      <span className="text-indigo-300">{value}</span>
+      <span className="flex-grow font-sans">{name}</span>
+      <span className="text-indigo-300 font-sans">{value}</span>
     </li>
   );
 };
