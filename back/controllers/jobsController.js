@@ -13,10 +13,6 @@ const getJobs = async (req, res) => {
 				if (a.name > b.name) return 1;
 				return 0;
 			});
-			res.json({
-				success: true,
-				data: jobs,
-			});
 			break;
 		case "offers":
 			jobs.sort(function compare(a, b) {
@@ -24,17 +20,12 @@ const getJobs = async (req, res) => {
 				if (a.total < b.total) return 1;
 				return 0;
 			});
-			res.json({
-				success: true,
-				data: jobs,
-			});
 			break;
-		default:
-			res.json({
-				success: true,
-				data: jobs,
-			});
 	}
+  res.json({
+    success: true,
+    data: jobs,
+  });
 };
 
 module.exports = { getJobs };
