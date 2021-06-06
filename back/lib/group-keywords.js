@@ -1,14 +1,60 @@
 const groupKeywords = (keywords) => {
-  const javascriptKeywords = ["javascript", "react", "node", "vue", "angular", "express"];
-  const phpKeywords = ["php", "symfony", "lavarel"];
+  const javascriptKeywords = [
+    'javascript',
+    'node',
+    'nodejs',
+    'react',
+    'vue',
+    'angular',
+    'svelte',
+    'koa',
+    'sails',
+    'ember',
+    'meteor',
+    'backbone',
+    'hapi',
+    'express',
+    'nest',
+    'adonis',
+    'next',
+    'gastby',
+    "express"
+  ];
+  const phpKeywords = [
+    "php",
+    "symfony",
+    "lavarel",
+    'wordpress',
+    'silex',
+    'codeigniter',
+    'zend',
+    'laminas',
+    'cakephp',
+    'slim',
+    'phalcon',
+    'fuelphp',
+    'fat'
+  ];
   const rubyKeywords = ["ruby"];
   const csharpKeywords = ["c#"];
   const pythonKeywords = ["python"];
   const javaKeywords = ["java"];
 
-  const frontKeywords = ["react", "angular", "vue", "css", "html"];
-  const backKeywords = ["node", "express"];
-  const databaseKeywords = ["mongodb", "mysql", "firebase"];
+  const frontKeywords = [
+    "react",
+    "angular",
+    "vue",
+    "css",
+    "html"
+  ];
+  const backKeywords = [
+    "node",
+    "express"
+  ];
+  const databaseKeywords = [
+    "mongodb",
+    "mysql",
+    "firebase"];
 
   const groupedWords = {
     "javascript": 0,
