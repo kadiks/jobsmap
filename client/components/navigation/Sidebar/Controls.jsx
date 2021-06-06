@@ -1,4 +1,4 @@
-import { ButtonGroup, Toggle } from "../../core/button";
+import { ButtonGroup, Toggle, Checkbox } from "../../core/button";
 
 const Controls = ({
   cities,
@@ -19,7 +19,8 @@ const Controls = ({
         onChange={onChangeFilterType}
       />
       <div className="flex justify-center flex-wrap items-center border-t border-b border-indigo-900 mt-2 mb-2">
-        <Toggle enabled={isDptView} onChange={onClickGroupDpt} />
+        <Checkbox enabled={isDptView} onChange={onClickGroupDpt} />
+        {/* <Toggle enabled={isDptView} onChange={onClickGroupDpt} /> */}
         <span className="pl-2 text-white text-xs">
           Grouper les départements ?
         </span>
