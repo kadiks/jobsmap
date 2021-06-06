@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-import { Sidebar, Searchbar } from "../components/navigation";
+import { Sidebar, Searchbar, JobPannel } from "../components/navigation";
 
 import { getPlaces } from "../utils/api";
 
@@ -18,7 +18,7 @@ const Home = (props) => {
   const prevCenter = prevCenterRef.current;
 
   useEffect(() => {
-    filterByKeyword();  
+    filterByKeyword();
   }, []);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const Home = (props) => {
 
   const filterByKeyword = (keyword = null) => {
     const newKeywords = [...selectedKeywords];
-    
+
     if (keyword !== null) {
       const keywordIndex = selectedKeywords.indexOf(keyword);
       if (keywordIndex >= 0) {
@@ -72,7 +72,7 @@ const Home = (props) => {
 
 
     console.log("newKeywords", newKeywords);
-    
+
 
     if (newKeywords.length > 0) {
       for (const curKeyword of newKeywords) {
@@ -83,10 +83,10 @@ const Home = (props) => {
         console.log("filteredPlaces", filteredPlaces.length);
       }
     }
-    
+
 
     console.log("filteredPlaces", filteredPlaces.length);
-    
+
     setPlaces(filteredPlaces);
     setSelectedKeywords(newKeywords);
     setFilterType('cities');
@@ -151,6 +151,10 @@ const Home = (props) => {
             selectedKeywords={selectedKeywords}
             onClickCity={onClickCity}
             onClickKeyword={onClickKeyword} />
+        </div>
+        <div className="flex-none">
+          <JobPannel />
+
         </div>
         <div className="flex flex-col flex-grow h-screen">
           {/* <Searchbar /> */}

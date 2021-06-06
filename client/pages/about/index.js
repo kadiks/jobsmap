@@ -72,6 +72,12 @@ export default function About() {
           >
             <h2>Jénaïc C (Développeur Next.js / React) &rarr;</h2>
           </a>
+          <a
+            href="https://github.com/GuillaumeDORE"
+            className={styles.card}
+          >
+            <h2>Guillaume Doré (Développeur React / Next.js) &rarr;</h2>
+          </a>
         </div>
       </main>
 

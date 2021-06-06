@@ -1,0 +1,52 @@
+.job_pannel {
+    width: 30vw;
+    min-width: 200px;
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    align-items: center;
+    margin: 1vh 1vw;
+    padding: 5px;
+    box-shadow: 4px 4px 8px #d1d9e6 inset, -4px -4px 8px #fff inset;
+    background-color: #ecf0f3;
+    color: #4f46e5;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.job_pannel::-webkit-scrollbar {
+    display: none;
+}
+
+.job_pannel h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.job_card {
+    width: 96%;
+    height: 20vh;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2%;
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    background-color: #ecf0f3;
+    box-shadow: 4px 4px 8px #d1d9e6, -4px -4px 8px #fff, 0px 0px 0px #d1d9e6 inset, 0px 0px 0px #fff inset;
+    transition: all 100ms ease-in-out;
+}
+.job_card:hover {
+    box-shadow: 0px 0px 0px #d1d9e6, 0px 0px 0px #fff, 4px 4px 8px #d1d9e6 inset, -4px -4px 8px #fff inset;
+}
+.job_card h3 {
+    font-size: 1.25rem;
+}
+.job_card section {
+    display: flex;
+    justify-content: space-between;
+}

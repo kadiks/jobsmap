@@ -1,4 +1,5 @@
 import Sidebar from "./Sidebar";
 import Searchbar from "./Searchbar";
+import JobPannel from "./JobPannel";
 
-export { Sidebar, Searchbar };
+export { Sidebar, Searchbar, JobPannel };
