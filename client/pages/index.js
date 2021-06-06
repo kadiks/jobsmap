@@ -38,19 +38,19 @@ const Home = (props) => {
   });
 
   const getMap = ({ map }) => {
-    console.log("pages/index getMap", map);
-    console.log("pages/index getMap map.getCenter", map.getCenter());
+    // console.log("pages/index getMap", map);
+    // console.log("pages/index getMap map.getCenter", map.getCenter());
     mapComp = map;
   };
 
   const onClickCity = (coords) => {
     // console.log("coords", coords);
-    console.log("mapComp.getCenter()", mapComp.getCenter());
+    // console.log("mapComp.getCenter()", mapComp.getCenter());
     mapComp.flyTo(coords);
     // setCenter(coords);
     setTimeout(() => {
       // setCenter(coords);
-      console.log("mapComp.getCenter()", mapComp.getCenter());
+      // console.log("mapComp.getCenter()", mapComp.getCenter());
     }, 2000);
   };
 
