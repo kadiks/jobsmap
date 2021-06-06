@@ -10,6 +10,7 @@ function Map({ markers, defaultCenter, center, zoom = 8, getMap }) {
       zoom={zoom}
       scrollWheelZoom={false}
       whenCreated={(map) => {
+        map.flyTo(center);
         getMap({ map });
       }}
       style={{ width: "100%", height: "100%" }}
@@ -21,7 +22,11 @@ function Map({ markers, defaultCenter, center, zoom = 8, getMap }) {
       {markers.map(({ title, coords }, index) => {
         return (
           <Marker key={index} position={coords}>
-            {title && <Popup className="font-sans" ><p dangerouslySetInnerHTML={{__html: title }} /></Popup>}
+            {title && (
+              <Popup className="font-sans">
+                <p dangerouslySetInnerHTML={{ __html: title }} />
+              </Popup>
+            )}
           </Marker>
         );
       })}

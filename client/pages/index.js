@@ -5,21 +5,29 @@ import dynamic from "next/dynamic";
 import { Sidebar, Searchbar } from "../components/navigation";
 
 import { getPlaces } from "../utils/api";
+import { filterByTechnologies, filterByCity } from "../utils/filter";
+import { groupByDepartment } from "../utils/group";
 
 const Home = (props) => {
   const defaultCenter = props.places[0]?.coords || [45.78365, 3.10013];
   const [center, setCenter] = useState(defaultCenter);
   const [places, setPlaces] = useState(props.places);
   const [selectedKeywords, setSelectedKeywords] = useState([]);
-  const [filterType, setFilterType] = useState('technologies');
+  const [filterType, setFilterType] = useState("technologies");
+  const [filterPlace, setfilterPlace] = useState("departments"); // cities | departments | regions
+  const [filterCity, setfilterCity] = useState(null);
+  const [isDptView, setIsDptView] = useState(false);
 
   let mapComp;
   const prevCenterRef = useRef();
   const prevCenter = prevCenterRef.current;
 
   useEffect(() => {
-    filterByKeyword();  
+    updateKeywords();
   }, []);
+  useEffect(() => {
+    updateKeywords();
+  }, [isDptView]);
 
   useEffect(() => {
     prevCenterRef.current = center;
@@ -46,19 +54,25 @@ const Home = (props) => {
     }, 2000);
   };
 
-  const onChangeFilterType = (id) => {
-    setFilterType(id);
-  }
-
-  const onClickKeyword = (keyword) => {
-    console.log('pages/index #onClickkeyword keyword', keyword);
-
-    filterByKeyword(keyword);
+  const onClickGroupDpt = () => {
+    // console.log("okook");
+    setIsDptView(!isDptView);
   };
 
-  const filterByKeyword = (keyword = null) => {
+  const onChangeFilterType = (id) => {
+    setFilterType(id);
+  };
+
+  const onClickKeyword = (keyword) => {
+    console.log("pages/index #onClickkeyword keyword", keyword);
+
+    updateKeywords(keyword);
+  };
+
+  const updateKeywords = (keyword = null) => {
     const newKeywords = [...selectedKeywords];
-    
+
+    // Add or remove keyword from list
     if (keyword !== null) {
       const keywordIndex = selectedKeywords.indexOf(keyword);
       if (keywordIndex >= 0) {
@@ -68,29 +82,34 @@ const Home = (props) => {
       }
     }
 
-    let filteredPlaces = props.places;
+    let filteredPlaces = filterByTechnologies({
+      places: props.places,
+      keywords: newKeywords,
+    });
 
+    filteredPlaces = filterByCity({
+      places: filteredPlaces,
+      search: filterCity,
+    });
 
-    console.log("newKeywords", newKeywords);
-    
-
-    if (newKeywords.length > 0) {
-      for (const curKeyword of newKeywords) {
-        filteredPlaces = filteredPlaces.filter((place) => {
-          return place.keywords.find(k => k.keyword === curKeyword);
-        });
-        console.log("curKeyword", curKeyword);
-        console.log("filteredPlaces", filteredPlaces.length);
-      }
+    if (isDptView) {
+      filteredPlaces = groupByDepartment({
+        places: filteredPlaces,
+      });
     }
-    
 
-    console.log("filteredPlaces", filteredPlaces.length);
-    
     setPlaces(filteredPlaces);
     setSelectedKeywords(newKeywords);
-    setFilterType('cities');
-    setCenter(filteredPlaces[0].coords);
+    setFilterType("cities");
+    // console.log("filteredPlaces[0]", filteredPlaces[0]);
+    // setCenter(filteredPlaces[0].coords);
+    console.log("mapComp flyTo #filter 1");
+    if (mapComp) {
+      console.log("mapComp flyTo #filter 2");
+      mapComp.flyTo(filteredPlaces[0].coords);
+    } else {
+      setCenter(filteredPlaces[0].coords);
+    }
   };
 
   const markers = [];
@@ -100,7 +119,7 @@ const Home = (props) => {
   for (const place of places) {
     const keywordsHtml = place.keywords.map((k) => `${k.keyword} : ${k.count}`);
     const marker = {
-      title: `${place.name} <br/> ${keywordsHtml.join('<br />')}`,
+      title: `${place.name} <br/> ${keywordsHtml.join("<br />")}`,
       coords: place.coords,
     };
 
@@ -111,7 +130,6 @@ const Home = (props) => {
     };
 
     const keyword = place.keywords;
-
 
     markers.push(marker);
     cities.push(city);
@@ -127,7 +145,7 @@ const Home = (props) => {
         uniqKeywords.push(keyword.keyword);
         uniqKeywordsObj.push({
           name: keyword.keyword,
-          value: keyword.keyword
+          value: keyword.keyword,
         });
       }
     }
@@ -136,9 +154,7 @@ const Home = (props) => {
   return (
     <>
       <Head>
-        <title>
-          Cartographie des offres d'emplois tech en France
-        </title>
+        <title>Cartographie des offres d'emplois tech en France</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="flex">
@@ -149,8 +165,11 @@ const Home = (props) => {
             cities={cities}
             keywords={uniqKeywordsObj}
             selectedKeywords={selectedKeywords}
+            isDptView={isDptView}
             onClickCity={onClickCity}
-            onClickKeyword={onClickKeyword} />
+            onClickKeyword={onClickKeyword}
+            onClickGroupDpt={onClickGroupDpt}
+          />
         </div>
         <div className="flex flex-col flex-grow h-screen">
           {/* <Searchbar /> */}
