@@ -27,5 +27,6 @@ npm run dev
 - Push `main` and it will push on Heroku (automagically)
 - Then build front : `cd client`
 - `npm run predeploy`
+- `cd ..`
 - `git commit -m ...`
 - `git push origin main`
