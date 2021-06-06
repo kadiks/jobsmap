@@ -49,17 +49,18 @@ const extractKeywords = (str) => {
 
   // Function to remove some expressions
   const cleanText = (str) => {
-    const cleaned = str.replace('js', '');
+    const cleaned = str.replace(/js/g, '');
     return cleaned;
   }
 
   // Transforms the str to be processed
   const text = str.toLowerCase()
   const cleanedText = cleanText(text);
+  console.log('cleanText', cleanText);
 
   // Cuts the text in an array of expressions
   const strSplitted = cleanedText.split(new RegExp('[-/., ]', 'g'));
-  // console.log("strSplitted", strSplitted);
+  console.log("strSplitted", strSplitted);
 
   // Counts the occurences of keywords
   strSplitted.map((word) => {
@@ -89,7 +90,7 @@ const extractKeywords = (str) => {
 if (require.main === module) {
   // le module a été appelé directement (via `node
   // extract-keywords.js`)
-  const testVector = "react";
+  const testVector = " react reactjs reactjs";
   console.log(extractKeywords(testVector));
 } else {
   module.exports = extractKeywords
