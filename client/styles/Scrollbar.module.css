@@ -1,0 +1,10 @@
+.scrollbar {
+  @apply pt-4 flex-grow flex flex-col space-x-px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}

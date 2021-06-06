@@ -3,6 +3,7 @@ const Cities = ({
     { name: "Paris", value: 1234 },
     { name: "Paris", value: 1234 },
   ],
+  scrollHeight,
   onClick = () => {},
 }) => {
   return (
@@ -10,7 +11,7 @@ const Cities = ({
       className="text-white overflow-scroll"
       style={{
         overflow: "scroll",
-        height: "70vh",
+        height: scrollHeight,
       }}
     >
       {cities.map((city, index) => {
