@@ -1,15 +1,31 @@
 const { isNull } = require("lodash");
 const fetch = require("node-fetch");
 
-const extractKeywords = require("../extract-keywords");
+const { extractKeywords } = require("../extract-keywords");
 
 const jobs = {
   lastSet: new Date(),
+  keywords: {},
   data: null,
   counts: {},
 };
 
-module.exports = async function getJobs(token) {
+module.exports = {
+	getKeywordsFromAPI,
+	getJobsFromAPI
+}
+
+async function getKeywordsFromAPI(token){
+	const jobsAreFresh = new Date() - jobs.lastSet < 8.64e7;
+	if(jobs.data && jobsAreFresh){
+		return jobs.keywords
+	}else{
+		await getJobsFromAPI(token)
+		return getKeywordsFromAPI(token)
+	}
+}
+
+async function getJobsFromAPI(token) {
   const jobsAreFresh = new Date() - jobs.lastSet < 8.64e7;
   if (jobs.data && jobsAreFresh) {
     return Object.values(jobs.counts);
@@ -66,6 +82,18 @@ function mergeKwSet(oldKw, newKw) {
 }
 
 function countJobs() {
+  // hack to count keywords globally
+  for(const entry of jobs.data){
+	  const kwct = extractKeywords(entry.description)
+	  kwct.forEach( kc => {
+		  if(jobs.keywords[kc.keyword]){
+			  jobs.keywords[kc.keyword] += kc.count
+		  }else{
+			jobs.keywords[kc.keyword] = kc.count
+		  }
+	  })
+  }
+  // end of hack to count keywords globally
   for (const entry of jobs.data) {
     if (jobs.counts[entry.lieuTravail.libelle]) {
       jobs.counts[entry.lieuTravail.libelle].total++;

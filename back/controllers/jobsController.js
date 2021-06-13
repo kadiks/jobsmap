@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const getJobsFromAPI = require("../lib/get-jobs");
+const { getJobsFromAPI } = require("../lib/get-jobs");
 
 const getJobs = async (req, res) => {
 	let jobs = await getJobsFromAPI(req.accessToken);
