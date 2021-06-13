@@ -12,4 +12,15 @@ const getPlaces = async () => {
   return data?.data || [];
 };
 
-export { getPlaces };
+const getOffers = async () => {
+  const res = await fetch(`${server}/jobs/places/dpt`);
+  const data = await res.json();
+
+  // console.log("data", data.data);
+  return data?.data || [];
+};
+
+export {
+  getPlaces,
+  getOffers
+};
