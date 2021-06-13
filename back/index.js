@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // controllers
-const { jobsController, keywordsController } = require("./controllers");
+const { jobsController, keywordsController, locationsController } = require("./controllers");
 
 let accessToken = null;
 
@@ -36,7 +36,7 @@ async function init() {
 	// Routes
 	app.use("/api/jobs/places", jobsController.getJobs);
 	app.use("/api/keywords", keywordsController.getKeywords);
-	app.use("/api/locations", keywordsController.getCities);
+	app.use("/api/locations", locationsController.getLocations);
 	// set a new token
 	setInterval(async function () {
 		accesToken = await getToken();

@@ -1,26 +1,38 @@
 import React, { useState, useEffect } from 'react'
 
-const Searchbar = () => {
+const Searchbar = (props) => {
     const [ searchTerm, setSearchTerm ] = useState('')
     const [ keywords, setKeywords ] = useState([])
     const [ showSuggestions, setShowSuggestions ] = useState(false)
+    const [ filteredKeywords, setFilteredKeywords ] = useState([])
     function onInputChange(event){
         const {value} = event.target
         setSearchTerm(value)
     }
+    function filterList(){
+        setFilteredKeywords( props.places.filter( word => {
+            const libelle = word.name.toLowerCase()
+            const term = searchTerm.toLowerCase()
+            return libelle.indexOf(term) !== -1
+        }))
+    }
+    
     useEffect(() => {
-        console.log(searchTerm)
-        if(searchTerm.length > 2 && !keywords.length){
-            const dev = process.env.NODE_ENV !== "production";
-            const server = dev ? "http://localhost:3002/api" : "https://mapojob.herokuapp.com/api";
-            fetch(`${server}/keywords`)
-            .then( res => res.json() )
-            .then( json => {
-                console.log(json)
-                setKeywords(json.data)
-            });
+        if(searchTerm.length > 2){
+            filterList()
+        }else{
+            setFilteredKeywords([])
         }
-    })
+    }, [searchTerm])
+
+
+    function clickSuggestion(e){
+        const coords = e.target.dataset.coords.split(',')
+        props.flyto(coords)
+        setShowSuggestions(false)
+        setSearchTerm('')
+        setFilteredKeywords([])
+    }
     return (
         <div className="flex w-100 justify-end px-4 py-2">
             <div className="flex items-center justify-center w-1/3">
@@ -34,7 +46,6 @@ const Searchbar = () => {
                     <input
                         onChange={onInputChange}
                         onFocus={()=>setShowSuggestions(true)}
-                        onBlur={()=>setShowSuggestions(false)}
                         value={searchTerm}
                         type="search"
                         name="q"
@@ -42,11 +53,11 @@ const Searchbar = () => {
                         placeholder="Rechercher..."
                         autocomplete="off" />
                     </div>
-                    {showSuggestions &&
+                    {showSuggestions && (filteredKeywords.length !== 0) &&
                     <ul
                     className="py-2"
                     style={{cursor: 'pointer', backgroundColor: 'white', position:'fixed', width: '200px', zIndex:'401'}}>
-                        {keywords.map( keyword => <li className="py-2">keyword</li>)}
+                        {filteredKeywords.map( keyword => <li onClick={clickSuggestion} data-coords={keyword.coords} key={keyword.id} className="py-2">{keyword.name}</li>)}
                     </ul>
                     }
                 </form>

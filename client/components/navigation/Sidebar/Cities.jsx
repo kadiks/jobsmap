@@ -9,6 +9,7 @@ const Cities = ({
   return (
     <ul
       className="text-white overflow-scroll"
+      id="placelist"
       style={{
         overflow: "scroll",
         height: scrollHeight,

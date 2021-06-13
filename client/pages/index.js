@@ -172,7 +172,7 @@ const Home = (props) => {
           />
         </div>
         <div className="flex flex-col flex-grow h-screen">
-          <Searchbar />
+          <Searchbar flyto={onClickCity} places={isDptView ? props.places : groupByDepartment({places: props.places})} />
           <div className="flex-1">
             <Map
               defaultCenter={defaultCenter}
