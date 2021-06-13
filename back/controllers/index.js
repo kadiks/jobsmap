@@ -1,3 +1,5 @@
 module.exports = {
-  jobsController: require('./jobsController')
+  jobsController: require('./jobsController'),
+  keywordsController: require('./keywordsController'),
+  locationsController: require('./locationsController')
 }

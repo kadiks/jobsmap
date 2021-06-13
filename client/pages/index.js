@@ -69,18 +69,18 @@ const Home = (props) => {
     updateKeywords(keyword);
   };
 
-  const updateKeywords = (keyword = null) => {
-    const newKeywords = [...selectedKeywords];
+  const updateKeywords = (newKeywords = selectedKeywords) => {
+    // const newKeywords = [...selectedKeywords];
 
-    // Add or remove keyword from list
-    if (keyword !== null) {
-      const keywordIndex = selectedKeywords.indexOf(keyword);
-      if (keywordIndex >= 0) {
-        newKeywords.splice(keywordIndex, 1);
-      } else {
-        newKeywords.push(keyword);
-      }
-    }
+    // // Add or remove keyword from list
+    // if (keyword !== null) {
+    //   const keywordIndex = selectedKeywords.indexOf(keyword);
+    //   if (keywordIndex >= 0) {
+    //     newKeywords.splice(keywordIndex, 1);
+    //   } else {
+    //     newKeywords.push(keyword);
+    //   }
+    // }
 
     let filteredPlaces = filterByTechnologies({
       places: props.places,
@@ -103,9 +103,9 @@ const Home = (props) => {
     setFilterType("cities");
     // console.log("filteredPlaces[0]", filteredPlaces[0]);
     // setCenter(filteredPlaces[0].coords);
-    console.log("mapComp flyTo #filter 1");
+    // console.log("mapComp flyTo #filter 1");
     if (mapComp) {
-      console.log("mapComp flyTo #filter 2");
+      // console.log("mapComp flyTo #filter 2");
       mapComp.flyTo(filteredPlaces[0].coords);
     } else {
       setCenter(filteredPlaces[0].coords);
@@ -156,6 +156,27 @@ const Home = (props) => {
       <Head>
         <title>Cartographie des offres d'emplois tech en France</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
       </Head>
       <div className="flex">
         <div className="flex-none">
@@ -172,7 +193,14 @@ const Home = (props) => {
           />
         </div>
         <div className="flex flex-col flex-grow h-screen">
-          {/* <Searchbar /> */}
+          <Searchbar
+            flyto={onClickCity}
+            places={
+              isDptView
+                ? props.places
+                : groupByDepartment({ places: props.places })
+            }
+          />
           <div className="flex-1">
             <Map
               defaultCenter={defaultCenter}

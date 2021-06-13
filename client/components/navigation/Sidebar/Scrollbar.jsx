@@ -10,26 +10,17 @@ const Scrollbar = ({
   selectedKeywords,
   onClickCity,
   onClickKeyword,
+  scrollbarHeight,
 }) => {
-  const scrollHeight = "65vh";
+  const scrollHeight = scrollbarHeight;
   return (
     <div className={styles.scrollbar}>
       <div className="flex-1">
-        {filterType === "cities" && (
-          <CityList
-            scrollHeight={scrollHeight}
-            cities={cities}
-            onClick={onClickCity}
-          />
-        )}
-        {filterType === "technologies" && (
-          <KeywordList
-            scrollHeight={scrollHeight}
-            keywords={keywords}
-            selectedKeywords={selectedKeywords}
-            onClick={onClickKeyword}
-          />
-        )}
+        <CityList
+          scrollHeight={scrollHeight}
+          cities={cities}
+          onClick={onClickCity}
+        />
       </div>
     </div>
   );

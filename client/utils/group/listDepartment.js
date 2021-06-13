@@ -5,141 +5,169 @@ const listDepartment = {
   "01": {
     name: "Ain",
     city: "Bourg-en-bresse",
+    coords: [ 46.2051675, 5.2255007 ]
   },
 
   "02": {
     name: "Aisne",
     city: "Laon",
+    coords: [49.566667, 3.616667]
   },
 
   "03": {
     name: "Allier",
     city: "Moulins",
+    coords: [46.568059, 3.334417]
   },
 
   "04": {
     name: "Alpes-de-Haute-Provence",
     city: "Digne-les-bains",
+    coords: [44.092193, 6.235976]
   },
 
   "05": {
     name: "Hautes-alpes",
     city: "Gap",
+    coords: [44.566667, 6.083333]
   },
 
   "06": {
     name: "Alpes maritimes",
     city: "Nice",
+    coords: [43.700000, 7.250000]
   },
 
   "07": {
     name: "Ardèche",
     city: "Privas",
+    coords: [44.733333, 4.600000]
   },
 
   "08": {
     name: "Ardennes",
     city: "Charleville-mézières",
+    coords: [49.762085, 4.726096]
   },
 
   "09": {
     name: "Ariège",
     city: "Foix",
+    coords: [42.966667, 1.600000]
   },
 
   10: {
     name: "Aube",
     city: "Troyes",
+    coords: [48.2973451, 4.0744009]
   },
 
   11: {
     name: "Aude",
     city: "Carcassonne",
+    coords: [43.212161, 2.353663]
   },
 
   12: {
     name: "Aveyron",
     city: "Rodez",
+    coords: [44.333333, 2.566667]
   },
 
   13: {
     name: "Bouches-du-Rhône",
     city: "Marseille",
+    coords: [43.300000, 5.400000]
   },
 
   14: {
     name: "Calvados",
     city: "Caen",
+    coords: [49.183333, -0.350000]
   },
 
   15: {
     name: "Cantal",
     city: "Aurillac",
+    coords: [, ]
   },
 
   16: {
     name: "Charente",
     city: "Angoulême",
+    coords: [, ]
   },
 
   17: {
     name: "Charente-maritime",
     city: "La rochelle",
+    coords: [, ]
   },
 
   18: {
     name: "Cher",
     city: "Bourges",
+    coords: [, ]
   },
 
   19: {
     name: "Corrèze",
     city: "Tulle",
+    coords: [, ]
   },
 
   20: {
     name: "Corse",
     city: "Ajaccio",
+    coords: [, ]
   },
 
   "2A": {
     name: "Corse-du-sud",
     city: "Ajaccio",
+    coords: [, ]
   },
 
   "2B": {
     name: "Haute-Corse",
     city: "Bastia",
+    coords: [, ]
   },
 
   21: {
     name: "Côte-d'Or",
     city: "Dijon",
+    coords: [, ]
   },
 
   22: {
     name: "Côtes-d'Armor",
     city: "Saint-brieuc",
+    coords: [, ]
   },
 
   23: {
     name: "Creuse",
     city: "Guéret",
+    coords: [, ]
   },
 
   24: {
     name: "Dordogne",
     city: "Périgueux",
+    coords: [, ]
   },
 
   25: {
     name: "Doubs",
     city: "Besançon",
+    coords: [, ]
   },
 
   26: {
     name: "Drôme",
     city: "Valence",
+    coords: [, ]
   },
 
   27: {
