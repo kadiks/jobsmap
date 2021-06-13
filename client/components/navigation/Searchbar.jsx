@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 const Searchbar = (props) => {
     const [ searchTerm, setSearchTerm ] = useState('')
-    const [ keywords, setKeywords ] = useState([])
     const [ showSuggestions, setShowSuggestions ] = useState(false)
     const [ filteredKeywords, setFilteredKeywords ] = useState([])
     function onInputChange(event){
