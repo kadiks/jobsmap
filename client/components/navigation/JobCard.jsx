@@ -7,7 +7,7 @@ const JobCard = (job) => {
     <div className={styles.job_card}>
       <p>Intitulé :{job.title}</p>
       <p>Description : {job.description}</p>
-      <p> Date: {job.date} </p>
+      <p>Date: {job.date} </p>
       <p>Technos : {job.keywords.map((keyword) => {
         return keyword.keyword + ' ';
       })}</p>

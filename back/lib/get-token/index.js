@@ -10,14 +10,14 @@ params.append('client_id', process.env.client_id)
 params.append('client_secret', process.env.client_secret)
 params.append('scope', process.env.scope)
 
-async function getToken(){
-    //@ts-ignore
-    const res = await fetch(url, { method: 'POST', body: params })
-    const json = await res.json()
-    if(res.status === 200){
-        return json.access_token
-    }
-    return null
+async function getToken() {
+  //@ts-ignore
+  const res = await fetch(url, { method: 'POST', body: params })
+  const json = await res.json()
+  if (res.status === 200) {
+    return json.access_token
+  }
+  return null
 }
 
 module.exports = getToken

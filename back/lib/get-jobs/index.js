@@ -25,9 +25,8 @@ module.exports = async function getJobs(token) {
 };
 
 async function requestJobs_(token, index = 0) {
-  const url = `https://api.emploi-store.fr/partenaire/offresdemploi/v2/offres/search?codeROME=M1805&range=${index}-${
-    index + 149
-  }`;
+  const url = `https://api.emploi-store.fr/partenaire/offresdemploi/v2/offres/search?codeROME=M1805&range=${index}-${index + 149
+    }`;
   const res = await fetch(url, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
@@ -35,7 +34,7 @@ async function requestJobs_(token, index = 0) {
   const json = await res.json();
   jobs.data = jobs.data.concat(json.resultats);
   if (res.status === 206 && index + 150 < 1000) {
-    await setTimeout(() => {}, 10000);
+    await setTimeout(() => { }, 10000);
     return requestJobs_(token, index + 150);
   }
 }

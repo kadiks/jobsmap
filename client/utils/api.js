@@ -12,7 +12,7 @@ const getPlaces = async () => {
   return data?.data || [];
 };
 
-const getOffers = async () => {
+const getOffers = async (dptNum) => {
   const res = await fetch(`${server}/jobs/places/dpt`);
   const data = await res.json();
 

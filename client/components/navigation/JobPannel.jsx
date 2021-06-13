@@ -7,11 +7,11 @@ import JobCard from './JobCard';
 import styles from "../../styles/JobPannel.module.css";
 
 
-const JobPannel = () => {
+const JobPannel = (dptNum) => {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    getOffers().then((data) => {
+    getOffers(dptNum).then((data) => {
       setJobs(data);
     })
   }, []);
