@@ -32,7 +32,7 @@ const Searchbar = () => {
               name="q"
               className="font-sans bg-gray-800 py-2 shadow text-sm text-white w-full border border-gray-500 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
               placeholder="Rechercher..."
-              autocomplete="off"
+              autoComplete="off"
             />
           </div>
         </form>
