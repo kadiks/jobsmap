@@ -1,7 +1,7 @@
-const { isNull } = require("lodash");
-const fetch = require("node-fetch");
+const { isNull } = require('lodash');
+const fetch = require('node-fetch');
 
-const extractKeywords = require("../extract-keywords");
+const extractKeywords = require('../extract-keywords');
 
 const jobs = {
   lastSet: new Date(),
@@ -29,7 +29,7 @@ async function requestJobs_(token, index = 0) {
     index + 149
   }`;
   const res = await fetch(url, {
-    method: "GET",
+    method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
   });
   const json = await res.json();
@@ -49,8 +49,8 @@ function kwToPseudoSet(kw) {
 function pseudoSetToKw(pseudoSet) {
   return Object.entries(pseudoSet)
     .map((o) => [
-      ["keyword", o[0]],
-      ["count", o[1]],
+      ['keyword', o[0]],
+      ['count', o[1]],
     ])
     .map(Object.fromEntries);
 }
@@ -76,8 +76,8 @@ function countJobs() {
     } else {
       jobs.counts[entry.lieuTravail.libelle] = {
         id: entry.lieuTravail.codePostal,
-        name: entry.lieuTravail.libelle.replace(/\d+\s-\s/giu, ""),
-        type: "city",
+        name: entry.lieuTravail.libelle.replace(/\d+\s-\s/giu, ''),
+        type: 'city',
         total: 1,
         coords: [entry.lieuTravail.latitude, entry.lieuTravail.longitude],
         keywords: kwToPseudoSet(extractKeywords(entry.description)),
