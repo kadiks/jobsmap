@@ -103,9 +103,9 @@ const Home = (props) => {
     setFilterType("cities");
     // console.log("filteredPlaces[0]", filteredPlaces[0]);
     // setCenter(filteredPlaces[0].coords);
-    console.log("mapComp flyTo #filter 1");
+    // console.log("mapComp flyTo #filter 1");
     if (mapComp) {
-      console.log("mapComp flyTo #filter 2");
+      // console.log("mapComp flyTo #filter 2");
       mapComp.flyTo(filteredPlaces[0].coords);
     } else {
       setCenter(filteredPlaces[0].coords);
@@ -193,7 +193,14 @@ const Home = (props) => {
           />
         </div>
         <div className="flex flex-col flex-grow h-screen">
-          <Searchbar />
+          <Searchbar
+            flyto={onClickCity}
+            places={
+              isDptView
+                ? props.places
+                : groupByDepartment({ places: props.places })
+            }
+          />
           <div className="flex-1">
             <Map
               defaultCenter={defaultCenter}

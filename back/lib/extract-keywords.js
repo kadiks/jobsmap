@@ -1,13 +1,13 @@
-const extractKeywords = (str) => {
+const keywords = [
+  'javascript',
+  'php',
+  'ruby',
+  'c#',
+  'python',
+  'java',
+];
 
-  const keywords = [
-    'javascript',
-    'php',
-    'ruby',
-    'c#',
-    'python',
-    'java',
-  ];
+const extractKeywords = (str) => {
 
   const keywordObjects = keywords.map((kw) => ({
     keyword: kw,
@@ -46,5 +46,5 @@ if(require.main === module){
   const testVector = "Stack technique - Langage : Vue.js, le back-end est en Python, Rust et C++ - Autres : Vue.js 2/3, Tailwind CSS - Données : Sur AWS, Aurora et Redshift - Cache : Redis - Environnement : Visual Studio code, sur l’OS que vous voulez !"
   console.log(extractKeywords(testVector));
 }else{
-  module.exports = extractKeywords
+  module.exports = { extractKeywords, keywords }
 }
