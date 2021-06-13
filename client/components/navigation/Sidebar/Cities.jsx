@@ -25,10 +25,10 @@ const Item = ({ name, value, coords, onClick }) => {
   return (
     <li
       onClick={() => onClick(coords)}
-      className="flex p-1 border-b border-indigo-500 cursor-pointer hover:bg-indigo-500 hover:text-indigo-800"
+      className="flex p-1 border-b border-yellow-100 cursor-pointer hover:bg-yellow-100 hover:text-gray-800"
     >
       <span className="flex-grow font-sans">{name}</span>
-      <span className="text-indigo-300 font-sans">{value}</span>
+      <span className="text-yellow-300 font-sans">{value}</span>
     </li>
   );
 };
