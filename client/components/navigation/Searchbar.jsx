@@ -68,7 +68,7 @@ const Searchbar = (props) => {
               value={searchTerm}
               type="search"
               name="q"
-              className="font-sans py-2 shadow text-sm text-white w-full border border-gray-500 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+              className="font-sans py-2 shadow text-sm text-white w-full border bg-gray-800 border-gray-500 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
               placeholder="Rechercher..."
               autoComplete="off"
             />
