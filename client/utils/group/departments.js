@@ -1,6 +1,7 @@
 import { listDepartment, listDepartmentName } from "./listDepartment";
 
 const groupByDepartment = ({ places = [] } = {}) => {
+  console.log("groupByDepartment places", places);
   const groupByDpt = {};
   /**
    * {
