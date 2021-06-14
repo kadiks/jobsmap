@@ -1,17 +1,21 @@
 module.exports = {
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  purge: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./utils/**/*.{js,ts,jsx,tsx}",
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      'body': ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      'sans': ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      body: ["Montserrat", "ui-sans-serif", "system-ui", "sans-serif"],
+      sans: ["Montserrat", "ui-sans-serif", "system-ui", "sans-serif"],
     },
     extend: {},
   },
   variants: {
     extend: {
-      backgroundColor: ['checked'],
-      borderColor: ['checked'],
+      backgroundColor: ["checked"],
+      borderColor: ["checked"],
     },
   },
   plugins: [],
