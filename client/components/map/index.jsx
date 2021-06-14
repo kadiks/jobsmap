@@ -8,7 +8,7 @@ import cfg from "../../utils/config";
 
 const icon = new L.Icon({
   iconUrl: "/marker.svg",
-  iconSize: [90, 60],
+  iconSize: [40, 50],
   className: "marker",
 });
 

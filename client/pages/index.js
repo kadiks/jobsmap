@@ -16,7 +16,7 @@ const Home = (props) => {
   const [filterType, setFilterType] = useState("technologies");
   const [filterPlace, setfilterPlace] = useState("departments"); // cities | departments | regions
   const [filterCity, setfilterCity] = useState(null);
-  const [isDptView, setIsDptView] = useState(false);
+  const [isDptView, setIsDptView] = useState(true);
 
   let mapComp;
   const prevCenterRef = useRef();
@@ -54,9 +54,8 @@ const Home = (props) => {
     }, 2000);
   };
 
-  const onClickGroupDpt = () => {
-    // console.log("okook");
-    setIsDptView(!isDptView);
+  const onClickGroupDpt = (isDptViewFromChild) => {
+    setIsDptView(isDptViewFromChild);
   };
 
   const onChangeFilterType = (id) => {
