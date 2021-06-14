@@ -19,7 +19,10 @@ const groupByDepartment = ({ places = [] } = {}) => {
     }
     if (place.id) {
       // console.log("#2 place", place);
-      const dptName = place.id.substr(0, 2);
+      let dptName = place.id.substr(0, 2);
+      if (dptName === "97") {
+        dptName = place.id.substr(0, 3);
+      }
       if (!groupByDpt.hasOwnProperty(dptName)) {
         groupByDpt[dptName] = [];
       }
@@ -31,8 +34,11 @@ const groupByDepartment = ({ places = [] } = {}) => {
 
   const dpts = [];
   const dptNames = Object.keys(groupByDpt);
+  console.log({groupByDpt});
   for (const dptName of dptNames) {
     const cities = groupByDpt[dptName];
+    console.log({dptName});
+    
     const cityMerge = {
       id: dptName,
       name: listDepartment[dptName].name,
